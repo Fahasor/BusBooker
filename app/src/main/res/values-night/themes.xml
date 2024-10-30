@@ -1,0 +1,14 @@
+<resources>
+
+<style name="Theme.HousingApp" parent="Base.Theme.HousingApp">
+    <item name="colorSurface">@color/black</item> <!-- Цвет фона -->
+    <item name="colorSurfaceContainer">@color/darktheme_dark_gray</item> <!-- Цвет сard view контейнеров на фоне -->
+    <item name="colorOnSurface">@color/white</item> <!-- Цвет текста -->
+    <item name="colorFaint">@color/darktheme_gray</item>
+    <item name="colorTertiary">@color/green_blue</item>
+    <item name="colorTransparentSurface">@color/transparent_black</item>
+    <item name="colorSecondary">@color/green_blue</item>
+
+</style>
+
+</resources>

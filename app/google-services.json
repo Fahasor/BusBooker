@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1075788609655",
+    "project_id": "busbooker-faf53",
+    "storage_bucket": "busbooker-faf53.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1075788609655:android:a3c84e28653b7f226eae72",
+        "android_client_info": {
+          "package_name": "com.example.busbooker"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDia8TVb7hzZI5EJP2J20YjyLeRFBNfUAo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
