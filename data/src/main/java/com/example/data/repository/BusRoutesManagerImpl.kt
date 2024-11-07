@@ -1,37 +1,32 @@
 package com.example.data.repository
 
-import android.util.Log
-import android.widget.Toast
 import com.example.data.mapper.toData
 import com.example.data.mapper.toDomain
 import com.example.data.model.RouteItemData
 import com.example.domain.model.RouteItemDomain
 import com.example.domain.repository.BusRoutesManager
-import org.jetbrains.annotations.Debug
 
 class BusRoutesManagerImpl : BusRoutesManager {
 
+    private external fun getBusRoutesNative(route: String): List<RouteItemData>
+
     override fun getBusRoutes(route: String): List<RouteItemDomain> {
-        return if (route == minskMozyr) {
-            minskMozyrRouteList.toDomain()
-        } else {
-            mozyrMinskRouteList.toDomain()
-        }
+        return getBusRoutesNative(route).toDomain();
     }
 
     override fun getMyBusRoutes(): List<RouteItemDomain> {
-        return myRouteList.toDomain()
+        return RoutesDb.myRouteList.toDomain()
     }
 
     override fun getCitiesRoutes(): List<String> {
-        return routeStringList
+        return RoutesDb.routeStringList
     }
 
     override fun addPassengerOn(route: RouteItemDomain): Boolean {
         return if (route.availableSeatsCount != 0) {
             val repositoryRouteList: MutableList<RouteItemData> = when(route.route) {
-                minskMozyr -> minskMozyrRouteList
-                mozyrMinsk -> mozyrMinskRouteList
+                RoutesDb.minskMozyr -> RoutesDb.minskMozyrRouteList
+                RoutesDb.mozyrMinsk -> RoutesDb.mozyrMinskRouteList
                 else -> return false
             }
 
@@ -46,14 +41,14 @@ class BusRoutesManagerImpl : BusRoutesManager {
                     availableSeatsCount = route.availableSeatsCount - 1,
                 )
 
-                for (i in myRouteList.indices) {
-                    if(myRouteList[i] == route.toData()) {
-                        myRouteList[i] = newRoute
+                for (i in RoutesDb.myRouteList.indices) {
+                    if(RoutesDb.myRouteList[i] == route.toData()) {
+                        RoutesDb.myRouteList[i] = newRoute
                     }
                 }
 
                 repositoryRouteList[index] = newRoute
-                myRouteList.add(newRoute)
+                RoutesDb.myRouteList.add(newRoute)
                 true
             } else {
                 false
@@ -65,8 +60,8 @@ class BusRoutesManagerImpl : BusRoutesManager {
 
     override fun deletePassengerFrom(route: RouteItemDomain): Boolean {
         val repositoryRouteList: MutableList<RouteItemData> = when(route.route) {
-            minskMozyr -> minskMozyrRouteList
-            mozyrMinsk -> mozyrMinskRouteList
+            RoutesDb.minskMozyr -> RoutesDb.minskMozyrRouteList
+            RoutesDb.mozyrMinsk -> RoutesDb.mozyrMinskRouteList
             else -> return false
         }
 
@@ -81,11 +76,11 @@ class BusRoutesManagerImpl : BusRoutesManager {
                 availableSeatsCount = route.availableSeatsCount + 1,
             )
             repositoryRouteList[index] = newRoute
-            myRouteList.remove(route.toData())
+            RoutesDb.myRouteList.remove(route.toData())
 
-            for (i in myRouteList.indices) {
-                if(myRouteList[i] == route.toData())
-                    myRouteList[i] = newRoute
+            for (i in RoutesDb.myRouteList.indices) {
+                if(RoutesDb.myRouteList[i] == route.toData())
+                    RoutesDb.myRouteList[i] = newRoute
             }
 
             true

@@ -9,12 +9,25 @@ plugins {
 android {
     namespace = "com.example.data"
     compileSdk = 34
+    ndkVersion = "28.0.12433566"
+
+    externalNativeBuild {
+        cmake {
+            version = "3.22.1"
+            path = file("src/main/cpp/CMakeLists.txt")
+        }
+    }
 
     defaultConfig {
         minSdk = 26
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+        externalNativeBuild {
+            cmake {
+                cppFlags += ""
+            }
+        }
     }
 
     buildTypes {

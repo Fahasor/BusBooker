@@ -23,6 +23,12 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var mNavigatorHolder: NavigatorHolder
 
+    companion object {
+      init {
+         System.loadLibrary("main")
+      }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         App.instance.appComponent.inject(this)
